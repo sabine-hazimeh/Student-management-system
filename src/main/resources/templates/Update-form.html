@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container mt-5">
+    <h1 class="text-center">"Update Student Details</h1>
+    <form action="#"  th:action="@{/update-student}" th:object="${student}" method="post">
+        <input type="hidden" class="form-control" id="ID" th:field="*{ID}" required th:value="${student.ID}">
+        <div class="form-group">
+            <label for="FirstName">First Name:</label>
+            <input type="text" id="FirstName" name="FirstName" th:value="*{firstName}" class="form-control" required>
+            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="LastName">Last Name:</label>
+            <input type="text" id="LastName" name="LastName" th:value="*{lastName}" class="form-control" required>
+            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="Credits">Allowed Credits:</label>
+            <input type="number" id="Credits" name="credits" th:value="*{credits}" class="form-control" required>
+            <span th:if="${#fields.hasErrors('credits')}" th:errors="*{credits}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="courses">Select Courses:</label>
+            <div th:each="course : ${courses}">
+                <input id="courses" type="checkbox" th:field="*{registeredCourses}" th:value="${course.courseName}" data-credits="${course.credits}" class="form-check-input">
+                <label th:text="${course.courseName}" class="form-check-label"></label><br>
+            </div>
+        </div>
+        <button id="updateButton" type="submit" class="btn btn-primary">Update Student</button>
+    </form>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+<!-- Include Bootstrap JS (Optional) -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

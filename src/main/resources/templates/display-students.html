@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student List</title>
+
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/style.css}" id="theme-stylesheet">
+    <script th:src="@{JavaScript.js}"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container bg-white py-4 rounded shadow">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="mb-0">Student List</h1>
+        <a th:href="@{/add-student-form}" class="btn btn-success" role="button">Create</a>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Courses</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.firstName}"></td>
+            <td th:text="${student.lastName}"></td>
+            <td>
+                <ul class="list-unstyled">
+                    <li th:each="course : ${student.RegisteredCourses}" th:text="${course}"></li>
+                </ul>
+            </td>
+            <td>
+                <div class="btn-group">
+                    <a th:href="@{/delete-student/{ID}(ID=${student.ID})}" class="btn btn-danger" role="button">Delete</a>
+                    <a th:href="@{/update-student/{ID}(ID=${student.ID})}" class="btn btn-success" role="button">Update</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- Include Bootstrap JS (Optional) -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

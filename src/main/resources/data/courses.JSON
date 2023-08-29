@@ -1,0 +1,16 @@
+[
+  {
+    "courseName":"Advanced Algorithm",
+    "courseSymbol": "CSC320",
+    "courseCredits": "4",
+    "courseInstructor": "Imad",
+    "instructorEmail": "Imad@gmail.com"
+  },
+  {
+    "courseName":"Introduction to Programming",
+    "courseSymbol": "CSC315",
+    "courseCredits": "3",
+    "courseInstructor": "Sara",
+    "instructorEmail": "Sara@gmail.com"
+  }
+]

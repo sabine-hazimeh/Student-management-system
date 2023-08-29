@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Form</title>
+
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4">Add New Course</h2>
+    <form action="#" th:action="@{add-course-to-list}" th:object="${course}" method="post">
+        <div class="form-group">
+            <label for="courseName">Course Name:</label>
+            <input type="text" class="form-control" id="courseName" name="courseName" th:field="*{courseName}" required>
+            <span th:if="${#fields.hasErrors('courseName')}" th:errors="*{courseName}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="courseSymbol">Course Symbol:</label>
+            <input type="text" class="form-control" id="courseSymbol" name="courseSymbol" th:field="*{courseSymbol}" required>
+            <span th:if="${#fields.hasErrors('courseSymbol')}" th:errors="*{courseSymbol}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="courseCredits">Course Credits:</label>
+            <input type="number" class="form-control" id="courseCredits" name="courseCredits" th:field="*{courseCredits}" required>
+            <span th:if="${#fields.hasErrors('courseCredits')}" th:errors="*{courseCredits}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="courseInstructor">Course Instructor:</label>
+            <input type="text" class="form-control" id="courseInstructor" name="courseName" th:field="*{courseInstructor}" required>
+            <span th:if="${#fields.hasErrors('courseInstructor')}" th:errors="*{courseInstructor}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="instructorEmail">Instructor Email:</label>
+            <input type="email" class="form-control" id="instructorEmail" name="courseName" th:field="*{instructorEmail}" required>
+            <span th:if="${#fields.hasErrors('instructorEmail')}" th:errors="*{instructorEmail}" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Course</button>
+    </form>
+</div>
+
+<!-- Include Bootstrap JS (Optional) -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

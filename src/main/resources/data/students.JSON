@@ -1,0 +1,16 @@
+[
+  {
+    "ID": "1758ab49-c651-4bb4-b3f9-6239482e91c0",
+    "firstName": "Sabine",
+    "lastName": "Hazimeh",
+    "credits": 12,
+    "registeredCourses": ["csc420"]
+  },
+  {
+    "ID": "0a6b2a5e-1461-4f0e-a0e1-638806a8945e",
+    "firstName": "Ali",
+    "lastName": "Hazimeh",
+    "credits": 10,
+    "registeredCourses": ["csc420","coe300"]
+  }
+]
