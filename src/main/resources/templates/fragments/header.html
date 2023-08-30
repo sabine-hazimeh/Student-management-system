@@ -8,9 +8,9 @@
 </head>
 <body>
 <header th:fragment="header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg border-bottom border-secondary-subtle">
         <div class="container">
-            <a class="navbar-brand" th:href="@{/display-students}">Mini Student Management System</a>
+            <a class="navbar-brand text-dark" th:href="@{/display-students}">Mini Student Management System</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -18,10 +18,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/get-students}">Students</a>
+                        <a class="nav-link text-dark" th:href="@{/get-students}">Students</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/get-courses}">Courses</a>
+                        <a class="nav-link text-dark" th:href="@{/get-courses}">Courses</a>
                     </li>
                 </ul>
             </div>

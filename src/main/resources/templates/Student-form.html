@@ -2,83 +2,80 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Student Form</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="/style.css" />
-<style>
-    .pill-checkbox-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
+    <title>Management System</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.1/css/bootstrap.min.css}"/>
 
-    .pill-checkbox {
-        display: inline-block;
-        padding: 5px 10px;
-        background-color: lightblue;
-        border-radius: 20px;
-        cursor: pointer;
-    }
+    <link rel="stylesheet" th:href="@{/style.css}" id="theme-stylesheet">
+    <!-- Include Bootstrap JavaScript (you need to adjust the path based on your project structure) -->
+    <script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.bundle.min.js}"></script>
+    <style>
+        .pill-checkbox-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-    .pill-checkbox.checked {
-        background-color: green;
-        /* other styling */
-    }
+        .pill-checkbox {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: lightblue;
+            border-radius: 20px;
+            cursor: pointer;
+        }
 
-    /* For selected courses with total credits exceeding the limit */
+        .pill-checkbox.checked {
+            background-color: green;
+            /* other styling */
+        }
 
-    .pill-checkbox.checked-exceeds {
-        background-color: red;
-        /* other styling */
-    }
+        /* For selected courses with total credits exceeding the limit */
+        .pill-checkbox.checked-exceeds {
+            background-color: red;
+            /* other styling */
+        }
+        .centered-form {
+            max-width: 70%; /* Adjust the width as needed */
+            margin: 0 auto; /* This centers the form horizontally */
+        }
 
-    .centered-form {
-        max-width: 70%;
-        /* Adjust the width as needed */
-        margin: 0 auto;
-        /* This centers the form horizontally */
-    }
-
-    .dark-mode .pill-checkbox {
-        color: #0C0F1D;
-    }
-</style>
+    </style>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
 <div class="container mt-5">
-    <h1 class="text-center">Create Student Details</h1>
-    <form action="#" class="centered-form" th:action="@{add-student-to-list}" th:object="${student}" method="post">
+    <h2 class="mb-4">Create Student Details</h2>
+    <form th:action="@{/add-student-to-list}" th:object="${student}" method="post" class="centered-form">
         <div class="mb-3">
-            <label for="FirstName" class="form-label">First Name:</label>
-            <input type="text" id="FirstName" name="FirstName" th:field="*{firstName}" class="form-control" required>
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
             <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label for="LastName" class="form-label">Last Name:</label>
-            <input type="text" id="LastName" name="LastName" th:field="*{lastName}" class="form-control" required>
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required>
             <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label for="Credits" class="form-label">Allowed Credits:</label>
-            <input type="number" id="Credits" name="credits" th:field="*{credits}" class="form-control" required>
-            <span th:if="${#fields.hasErrors('credits')}" th:errors="*{credits}" class="text-danger"></span>
+            <label for="allowedCredits" class="form-label">Allowed Credits</label>
+            <input type="number" class="form-control" id="allowedCredits" th:field="*{Credits}" th:value="${student.Credits}" required>
+            <span th:if="${#fields.hasErrors('Credits')}" th:errors="*{Credits}"
+                  class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label for="courses">Select Courses:</label>
-            <div th:each="course : ${courses}">
-                <input id="courses" type="checkbox" th:field="*{registeredCourses}" th:value="${course.courseName}" class="form-check-input">
-                <label th:text="${course.courseName}" class="pill-checkbox checked" data-credits="course.credits"></label><br>
-            </div>
+        <div class="pill-checkbox-container">
+            <label th:class="'pill-checkbox' + (${course.CourseName} == null ? ' unchecked' : ' checked')" th:each="course : ${courses}" th:data-credits="${course.courseCredits}">
+                <input type="checkbox" th:value="${course.courseSymbol}" th:field="*{registeredCourses}" name="courses"/>
+                <span th:text="${course.courseName + ' (' + course.courseCredits + ' credits)'}"></span>
+            </label>
         </div>
-        <button id="updateButton" type="submit" class="btn btn-primary">Create Student</button>
+
+        <br/>
+        <button id="createButton" type="submit" class="btn btn-primary">Create Student</button>
     </form>
 </div>
+<br/>
 <div th:replace="fragments/footer :: footer"></div>
-<!-- Include Bootstrap JS (Optional) -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script>
-    
     const allowedCreditsInput = document.getElementById("allowedCredits");
     const coursePills = document.querySelectorAll(".pill-checkbox");
 
@@ -92,8 +89,7 @@
         });
         return totalCredits;
     }
-
-    function updatePillColors() {
+function updatePillColors() {
         const totalCredits = calculateTotalCredits();
         console.log(totalCredits)
         const allowedCredits = parseFloat(allowedCreditsInput.value);
@@ -132,4 +128,3 @@
 
 </body>
 </html>
-

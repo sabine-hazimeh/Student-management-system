@@ -5,7 +5,10 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
+import java.util.UUID;
+
 public class Course {
+    private UUID ID;
     @NotEmpty(message = "please fill this field")
     private String courseName;
     @NotEmpty(message = "please fill this field")
@@ -19,14 +22,25 @@ public class Course {
     private String instructorEmail;
 
     public Course() {
+        this.ID=UUID.randomUUID();
     }
 
-    public Course(String courseName, String courseSymbol, int courseCredits, String courseInstructor, String instructorEmail) {
+
+    public Course(UUID ID, String courseName, String courseSymbol, int courseCredits, String courseInstructor, String instructorEmail) {
+        this.ID = ID;
         this.courseName = courseName;
         this.courseSymbol = courseSymbol;
         this.courseCredits = courseCredits;
         this.courseInstructor = courseInstructor;
         this.instructorEmail = instructorEmail;
+    }
+
+    public UUID getID() {
+        return ID;
+    }
+
+    public void setID(UUID ID) {
+        this.ID = ID;
     }
 
     public String getCourseName() {
